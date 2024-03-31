@@ -36,7 +36,7 @@ namespace TDController
                 DashDown = _dash.WasPressedThisFrame(),
                 AttackDown = _attack.WasPressedThisFrame(),
                 Move = _move.ReadValue<Vector2>(),
-                Menu = _menu.IsPressed(),
+                Menu = _menu.WasPressedThisFrame(),
 
             };
         }

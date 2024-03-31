@@ -56,8 +56,8 @@ namespace TDController
             else _currentExternalVelocity = vel;
         }
 
-        public virtual void TakeAwayControl(bool resetVelocity = true) {
-            if (resetVelocity) _rb.velocity = Vector2.zero;
+        public virtual void TakeAwayControl(/*bool resetVelocity = true*/) {
+            /*if (resetVelocity) _rb.velocity = Vector2.zero;*/
             _hasControl = false;
         }
 
@@ -73,10 +73,20 @@ namespace TDController
             _input = GetComponent<PlayerInput>();
             _cachedTriggerSetting = Physics2D.queriesHitTriggers;
             Physics2D.queriesStartInColliders = false;
-
+            UIEvents.current.onGameStart += ReturnControl;
+            UIEvents.current.onGameStop += TakeAwayControl;
             ToggleColliders(isStanding: true);
         }
-
+        private void OnDisable()
+        {
+            UIEvents.current.onGameStart -= ReturnControl;
+            UIEvents.current.onGameStop -= TakeAwayControl;
+        }
+        private void OnDestroy()
+        {
+            UIEvents.current.onGameStart -= ReturnControl;
+            UIEvents.current.onGameStop -= TakeAwayControl;
+        }
         protected virtual void Update() {
             GatherInput();
         }

@@ -9,7 +9,7 @@ public class Branch : MonoBehaviour
 {
    
     private Image BranchMain_Image;
-    public List<Button> SubBranches;
+    public List<GameObject> SubBranches;
     private SkillTree skillTree;
     private Skill.Skills currentSkill; 
     private void Awake()
@@ -18,9 +18,9 @@ public class Branch : MonoBehaviour
         skillTree = GetComponentInParent<SkillTree>();
         BranchMain_Image  = GetComponent<Image>();
         GetComponent<Button>().onClick.AddListener(UnequipSkill); ;
-       foreach (Button button in SubBranches)
+       foreach (GameObject subbranch in SubBranches)
         {
-            button.onClick.AddListener(() => EquipSkill(button.gameObject));
+            subbranch.GetComponent<Button>().onClick.AddListener(() => EquipSkill(subbranch));
         }
     }
     void EquipSkill(GameObject go)
@@ -29,6 +29,25 @@ public class Branch : MonoBehaviour
         skillTree.EquipSkill(tmpskill, currentSkill);
         SetSprite(go.GetComponent<Image>());
         currentSkill= tmpskill;
+    }
+    public void LoadSkill(Skill.Skills skill)
+    {   
+        foreach(GameObject subbranch in SubBranches)
+        { 
+            if(subbranch.GetComponent<Skill>().skill==skill)
+            {
+                //print("SkillLoaded: "+(int)skill);
+                SetSprite(subbranch.GetComponent<Image>());
+            }
+            
+        }
+        //Image imageToSet=new Image;
+        currentSkill = skill;
+    }
+    public void SetEmpty()
+    {
+        currentSkill = 0;
+        RemoveSprite();
     }
     void UnequipSkill()
     {
@@ -43,11 +62,6 @@ public class Branch : MonoBehaviour
     void SetSprite(Image image)
     {
         BranchMain_Image.sprite = image.sprite;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 }

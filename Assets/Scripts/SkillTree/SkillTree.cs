@@ -1,45 +1,62 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class SkillTree : MonoBehaviour
 {
    public Sprite Empty_Sprite;
    public Image Heart_Image;
-   public Image RedBranchMain_Image;
-   public Image BlueBranchMain_Image;
-   public Image GreenBranchMain_Image;
+   public GameObject RedBranchMain;
+   public GameObject BlueBranchMain;
+   public GameObject GreenBranchMain;
     //private Skill
     [SerializeField] Skill.Skills skills;
+
     private void Awake()
     {
-        LoadSkills();
-        print(JSONSave.GetInt("Skills"));
+        //print(JSONSave.GetInt("Skills"));
     }
     private void Start()
     {
-        RedBranchMain_Image.sprite = Empty_Sprite;
-        BlueBranchMain_Image.sprite = Empty_Sprite;
-        GreenBranchMain_Image.sprite = Empty_Sprite;
+        LoadSkills();
     }
     public void LoadSkills()
     {
         skills = (Skill.Skills)JSONSave.GetInt("Skills");
+
+        //Red
+        var tmpskills = (skills & Skill.Skills.RedSkill1) | (skills & Skill.Skills.RedSkill2) | (skills & Skill.Skills.RedSkill3);
+
+        if (tmpskills!=0)
+        {
+            RedBranchMain.GetComponent<Branch>().LoadSkill(tmpskills);
+        }
+        else
+            RedBranchMain.GetComponent<Branch>().SetEmpty();
+
+        //Green
+        tmpskills = (skills & Skill.Skills.GreenSkill1) | (skills & Skill.Skills.GreenSkill2) | (skills & Skill.Skills.GreenSkill3);
+        if (tmpskills != 0)
+        {
+            
+
+            GreenBranchMain.GetComponent<Branch>().LoadSkill(tmpskills);
+        }
+        else
+            GreenBranchMain.GetComponent<Branch>().SetEmpty();
+
         //Blue
-        if (skills.HasFlag(Skill.Skills.RedSkill1)|| skills.HasFlag(Skill.Skills.RedSkill2) || skills.HasFlag(Skill.Skills.RedSkill3))
+        tmpskills = (skills & Skill.Skills.BlueSkill1) | (skills & Skill.Skills.BlueSkill2) | (skills & Skill.Skills.BlueSkill3);
+        if (tmpskills != 0)
         {
-
+            BlueBranchMain.GetComponent<Branch>().LoadSkill(tmpskills);
         }
-        if (skills.HasFlag(Skill.Skills.GreenSkill1) || skills.HasFlag(Skill.Skills.GreenSkill2) || skills.HasFlag(Skill.Skills.GreenSkill3))
-        {
-
-        }
-        if (skills.HasFlag(Skill.Skills.BlueSkill1) || skills.HasFlag(Skill.Skills.BlueSkill2) || skills.HasFlag(Skill.Skills.BlueSkill3))
-        {
-
-        }
+        else
+            BlueBranchMain.GetComponent<Branch>().SetEmpty();
     }
     public void GetActiveSkills()
     {
