@@ -15,7 +15,7 @@ public class LevelSwitcher : MonoBehaviour
         {
             
             activeFrame?.SetActive(true);
-            UIEvents.current.LevelColliderChanged(GetComponent<PolygonCollider2D>());
+            GameEvents.current.LevelColliderChanged(GetComponent<PolygonCollider2D>());
         }
     }
 }

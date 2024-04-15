@@ -36,12 +36,12 @@ public class GameMenu : MonoBehaviour
     {
         if (!Menu.activeSelf)
         {
-            UIEvents.current.GameStop();
+            GameEvents.current.GameStop();
             ActivateMenu();
         }
         else
         {
-            UIEvents.current.GameStart();
+            GameEvents.current.GameStart();
             DisactivateMenu();
         }
     }

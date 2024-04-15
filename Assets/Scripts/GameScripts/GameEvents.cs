@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UIEvents : MonoBehaviour
+public class GameEvents : MonoBehaviour
 {
-    public static UIEvents current;
+    public static GameEvents current;
     void Awake()
     {
         current = this;
@@ -16,14 +14,22 @@ public class UIEvents : MonoBehaviour
     {
         onGameStop?.Invoke();
     }
+
     public event Action onGameStart;
     public void GameStart()
     {
         onGameStart?.Invoke();
     }
+
     public event Action<PolygonCollider2D> onLevelColliderChanged;
     public void LevelColliderChanged(PolygonCollider2D coll)
     {
         onLevelColliderChanged?.Invoke(coll);
+    }
+
+    public event Action onDeath;
+    public void Death()
+    {
+        onDeath?.Invoke();
     }
 }

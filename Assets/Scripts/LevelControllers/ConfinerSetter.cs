@@ -13,7 +13,7 @@ public class ConfinerSetter : MonoBehaviour
     }
     private void Start()
     {
-        UIEvents.current.onLevelColliderChanged += SetCollider;
+        GameEvents.current.onLevelColliderChanged += SetCollider;
     }
     private void SetCollider(PolygonCollider2D coll)
     {

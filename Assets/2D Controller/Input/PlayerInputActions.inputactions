@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Growth",
+                    "type": "Button",
+                    "id": "b978386a-9746-4af7-a15e-2801dc7d9efe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -250,17 +259,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0568f55d-4e6c-420d-84e7-9c855eddb769",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "05acc046-9d65-4c83-96c5-15b09421f6ab",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -300,6 +298,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4450c345-a232-4fd4-a43f-2e0c323ae0dd",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Growth",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

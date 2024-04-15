@@ -82,6 +82,15 @@ namespace TDController
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Growth"",
+                    ""type"": ""Button"",
+                    ""id"": ""b978386a-9746-4af7-a15e-2801dc7d9efe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,17 +283,6 @@ namespace TDController
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0568f55d-4e6c-420d-84e7-9c855eddb769"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""05acc046-9d65-4c83-96c5-15b09421f6ab"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -324,6 +322,17 @@ namespace TDController
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4450c345-a232-4fd4-a43f-2e0c323ae0dd"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Growth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -401,6 +410,7 @@ namespace TDController
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_ExampleAction = m_Player.FindAction("ExampleAction", throwIfNotFound: true);
             m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+            m_Player_Growth = m_Player.FindAction("Growth", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -468,6 +478,7 @@ namespace TDController
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_ExampleAction;
         private readonly InputAction m_Player_Menu;
+        private readonly InputAction m_Player_Growth;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -478,6 +489,7 @@ namespace TDController
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @ExampleAction => m_Wrapper.m_Player_ExampleAction;
             public InputAction @Menu => m_Wrapper.m_Player_Menu;
+            public InputAction @Growth => m_Wrapper.m_Player_Growth;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -505,6 +517,9 @@ namespace TDController
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Growth.started += instance.OnGrowth;
+                @Growth.performed += instance.OnGrowth;
+                @Growth.canceled += instance.OnGrowth;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -527,6 +542,9 @@ namespace TDController
                 @Menu.started -= instance.OnMenu;
                 @Menu.performed -= instance.OnMenu;
                 @Menu.canceled -= instance.OnMenu;
+                @Growth.started -= instance.OnGrowth;
+                @Growth.performed -= instance.OnGrowth;
+                @Growth.canceled -= instance.OnGrowth;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -597,6 +615,7 @@ namespace TDController
             void OnAttack(InputAction.CallbackContext context);
             void OnExampleAction(InputAction.CallbackContext context);
             void OnMenu(InputAction.CallbackContext context);
+            void OnGrowth(InputAction.CallbackContext context);
         }
     }
 }

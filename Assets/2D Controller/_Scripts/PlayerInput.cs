@@ -14,7 +14,7 @@ namespace TDController
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInputActions _actions;
-        private InputAction _move, _jump, _dash, _attack,_menu;
+        private InputAction _move, _jump, _dash, _attack,_menu,_growth;
 
         private void Awake() {
             _actions = new PlayerInputActions();
@@ -23,6 +23,7 @@ namespace TDController
             _dash = _actions.Player.Dash;
             _attack = _actions.Player.Attack;
             _menu = _actions.Player.Menu;
+            _growth = _actions.Player.Growth;
         }
 
         private void OnEnable() => _actions.Enable();
@@ -37,6 +38,7 @@ namespace TDController
                 AttackDown = _attack.WasPressedThisFrame(),
                 Move = _move.ReadValue<Vector2>(),
                 Menu = _menu.WasPressedThisFrame(),
+                Growth = _growth.WasPressedThisFrame(),
 
             };
         }
@@ -62,5 +64,6 @@ namespace TDController
         public bool DashDown;
         public bool AttackDown;
         public bool Menu;
+        public bool Growth;
     }
 }
