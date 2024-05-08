@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public abstract class HealthController : MonoBehaviour
     [SerializeField]
     protected float health;
     protected bool isDead = false;
+ 
     // Start is called before the first frame update
     protected void Start()
     {
@@ -19,5 +21,6 @@ public abstract class HealthController : MonoBehaviour
     {
         health = 0;
         isDead = true;
+
     }
 }

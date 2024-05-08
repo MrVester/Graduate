@@ -32,4 +32,14 @@ public class GameEvents : MonoBehaviour
     {
         onDeath?.Invoke();
     }
+    public event Action onCheckpointTouched;
+    public void CheckpointTouched()
+    {
+        onCheckpointTouched?.Invoke();
+    }
+    public event Action<Vector3> onCheckpointSavePosition;
+    public void CheckpointSavePosition(Vector3 position)
+    {
+        onCheckpointSavePosition?.Invoke(position);
+    }
 }

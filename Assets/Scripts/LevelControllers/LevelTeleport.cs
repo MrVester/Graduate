@@ -9,7 +9,7 @@ public class LevelTeleport : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.transform.position=teleportTo.position;
+            other.gameObject.transform.position=new Vector3 (teleportTo.position.x, teleportTo.position.y, other.gameObject.transform.position.z);
             teleportTo.gameObject.SetActive(false);
         }
     }

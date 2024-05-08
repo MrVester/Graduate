@@ -1,6 +1,7 @@
 // ReSharper disable ClassWithVirtualMembersNeverInherited.Global
 
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TDController
@@ -8,7 +9,10 @@ namespace TDController
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController {
         [SerializeField] private ScriptableStats _stats;
-
+        [SerializeField] private float timeBetweenAttacks;
+        [SerializeField] bool isDoubleJumpAllowed;
+        float attackTime;
+        private float defaultTimeBetweenAttacks;
         #region Internal
 
         [HideInInspector] private Rigidbody2D _rb; // Hide is for serialization to avoid errors in gizmo calls
@@ -16,6 +20,7 @@ namespace TDController
         [SerializeField] private CapsuleCollider2D _crouchingCollider;
         private CapsuleCollider2D _col; // current active collider
         private PlayerInput _input;
+        private AnimationController animController;
         private bool _cachedTriggerSetting;
 
         protected FrameInput FrameInput;
@@ -46,6 +51,10 @@ namespace TDController
         public bool GrabbingLedge { get; private set; }
         public bool ClimbingLedge { get; private set; }
 
+        public void SetTimeBetweenAttacks(float time)
+        {
+            timeBetweenAttacks= time;
+        }
         public virtual void ApplyVelocity(Vector2 vel, PlayerForce forceType) {
             if (forceType == PlayerForce.Burst) _speed += vel;
             else _currentExternalVelocity += vel;
@@ -57,7 +66,7 @@ namespace TDController
         }
 
         public virtual void TakeAwayControl(/*bool resetVelocity = true*/) {
-            /*if (resetVelocity) _rb.velocity = Vector2.zero;*/
+            /*if (resetVelocity) */_rb.velocity = Vector2.zero;
             _hasControl = false;
         }
 
@@ -65,27 +74,58 @@ namespace TDController
             _speed = Vector2.zero;
             _hasControl = true;
         }
-
+        private void TakeAwayAllControl()
+        {
+            TakeAwayControl();
+            controlTaken = true;
+            StartCoroutine(SetVelocityZero());
+        }
+        private void ReturnAllControl()
+        {
+            ReturnControl();
+            controlTaken = false;
+            StopCoroutine(SetVelocityZero());
+        }
+        private bool controlTaken=false;
+        private IEnumerator SetVelocityZero()
+        {
+            while (controlTaken)
+            {
+                _rb.velocity= Vector2.zero;
+                yield return null;
+            }
+        }
         #endregion
 
         protected virtual void Awake() {
             _rb = GetComponent<Rigidbody2D>();
             _input = GetComponent<PlayerInput>();
+            animController = GetComponent<AnimationController>();
             _cachedTriggerSetting = Physics2D.queriesHitTriggers;
             Physics2D.queriesStartInColliders = false;
-            GameEvents.current.onGameStart += ReturnControl;
-            GameEvents.current.onGameStop += TakeAwayControl;
+            GameEvents.current.onGameStart += ReturnAllControl;
+            GameEvents.current.onGameStop += TakeAwayAllControl;
+            GameEvents.current.onDeath += Death;
             ToggleColliders(isStanding: true);
+            defaultTimeBetweenAttacks = timeBetweenAttacks;
+        }
+        private void Death()
+        {
+            TakeAwayAllControl();
+            GameEvents.current.onGameStart -= ReturnAllControl;
+            GameEvents.current.onGameStop -= TakeAwayAllControl;
         }
         private void OnDisable()
         {
-            GameEvents.current.onGameStart -= ReturnControl;
-            GameEvents.current.onGameStop -= TakeAwayControl;
+            GameEvents.current.onGameStart -= ReturnAllControl;
+            GameEvents.current.onGameStop -= TakeAwayAllControl;
+            GameEvents.current.onDeath -= TakeAwayAllControl;
         }
         private void OnDestroy()
         {
-            GameEvents.current.onGameStart -= ReturnControl;
-            GameEvents.current.onGameStop -= TakeAwayControl;
+            GameEvents.current.onGameStart -= ReturnAllControl;
+            GameEvents.current.onGameStop -= TakeAwayAllControl;
+            GameEvents.current.onDeath -= TakeAwayAllControl;
         }
         protected virtual void Update() {
             GatherInput();
@@ -113,7 +153,7 @@ namespace TDController
 
         protected virtual void FixedUpdate() {
             _fixedFrame++;
-
+            attackTime +=Time.deltaTime;
             CheckCollisions();
             HandleCollisions();
             HandleWalls();
@@ -473,8 +513,12 @@ namespace TDController
             ResetAirJumps();
         }
 
-        protected virtual void ResetAirJumps() => _airJumpsRemaining = _stats.MaxAirJumps;
-
+        protected virtual void ResetAirJumps() => _airJumpsRemaining = isDoubleJumpAllowed?1:0;
+        public virtual void SetDoubleJumps(bool isDoubleJump)
+        {
+            isDoubleJumpAllowed=isDoubleJump;
+            ResetAirJumps();
+        }
         #endregion
 
         #region Dashing
@@ -528,14 +572,14 @@ namespace TDController
         #region Attacking
 
         private bool _attackToConsume;
-        private int _frameLastAttacked = int.MinValue;
+        private float _timeLastAttacked = float.MinValue;
 
 
         protected virtual void HandleAttacking() {
+            
             if (!_attackToConsume) return;
-            // note: animation looks weird if we allow attacking while crouched. consider different attack animations or not allow it while crouched
-            if (_fixedFrame > _frameLastAttacked + _stats.AttackFrameCooldown) {
-                _frameLastAttacked = _fixedFrame;
+            if (attackTime > _timeLastAttacked + timeBetweenAttacks) {
+                _timeLastAttacked = attackTime;
                 Attacked?.Invoke();
             }
 

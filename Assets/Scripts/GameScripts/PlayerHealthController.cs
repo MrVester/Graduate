@@ -3,18 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TDController;
-public class PlayerHealthController : HealthController
+public class PlayerHealthController : HealthController, IDamagable
 {
 
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField]private float greenHeartHealRatio;
+    [SerializeField]private float timeBetweenHeal;
+    private bool canGreenHeartHeal=false;
     private PlayerController playerController;
-    public HealthBar healthBar;
+    private AnimationController playerAnimator;
     //private DamageFlash _damageFlash;
 
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+        playerAnimator = GetComponentInChildren<AnimationController>();
+    }
     private new void Start()
     {
 
         base.Start();
-        playerController = GetComponentInChildren<PlayerController>();
+       
         healthBar.SetMaxHealth(maxHealth);
        // _damageFlash = GetComponent<DamageFlash>();
 
@@ -43,7 +52,7 @@ public class PlayerHealthController : HealthController
         if (health <= 0 && !isDead)
         {
             health = 0;
-            healthBar.SetHealth(0);
+            healthBar.SetHealthLerp(0);
             isDead = true;
             KillPlayer();
         }
@@ -53,25 +62,61 @@ public class PlayerHealthController : HealthController
         if (health > 0 && !isDead)
         {
 
-            healthBar.SetHealth(health);
-            Debug.Log("Player health: " + health);
+            healthBar.SetHealthLerp(health);
+            //Debug.Log("Player health: " + health);
         }
     }
 
     public override void Kill()
     {
         base.Kill();
-        healthBar.SetHealth(0);
+        healthBar.SetHealthLerp(0);
         KillPlayer();
     }
     private void KillPlayer()
     {
         GameEvents.current.Death();
-        GameEvents.current.GameStop();
-        
-        //playerController.PlayDeathAnimation();
+        //GameEvents.current.GameStop();
+        StopGreenHeartHeal();
 
-        //OLD playerController.animator.SetBool("Dead", true);
+        playerAnimator.animator.Play("Death");
+        playerAnimator.SetDead(true);
+        playerAnimator.animator.SetBool("IsDead", true);
     }
+    public void SetMaxHealth()
+    {
+        print("SetMaxHealth");
+        health=maxHealth;
+        healthBar.SetHealthLerp(maxHealth);
+    }
+    public void StartGreenHeartHeal()
+    {
+        canGreenHeartHeal = true;
+        StartCoroutine(GreenHeartHeal());
+    }
+    public void StopGreenHeartHeal()
+    {
+        canGreenHeartHeal = false;
+        StopCoroutine(GreenHeartHeal());
+    }
+    IEnumerator GreenHeartHeal()
+    {
+        while (canGreenHeartHeal)
+        {
+            yield return new WaitForSeconds(timeBetweenHeal);
+            if (health < maxHealth)
+            {
+                health += greenHeartHealRatio;
+                healthBar.SetHealthLerp(health);
+            }
 
+            else
+            {
+                health = maxHealth;
+                healthBar.SetHealthLerp(health);
+            }
+               
+            yield return null;
+        }
+    }
 }

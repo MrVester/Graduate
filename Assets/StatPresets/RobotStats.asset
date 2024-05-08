@@ -72,7 +72,7 @@ MonoBehaviour:
   DashCooldown: 1.5
   DashEndHorizontalMultiplier: 0.25
   AllowAttacks: 1
-  AttackFrameCooldown: 15
+  AttackFrameCooldown: 1000
   ExternalVelocityDecay: 100
   ShowWallDetection: 1
   ShowLedgeDetection: 1

@@ -9,16 +9,52 @@ public class Branch : MonoBehaviour
     private Image BranchMain_Image;
     public List<GameObject> SubBranches;
     private SkillTree skillTree;
-    private Skill.Skills currentSkill; 
+    private Skills currentSkill; 
     private void Awake()
     {
         //Make dynamically search for SubBranch buttons in this Go
         skillTree = GetComponentInParent<SkillTree>();
         BranchMain_Image  = GetComponent<Image>();
-        GetComponent<Button>().onClick.AddListener(UnequipSkill); ;
+        GetComponent<Button>().onClick.AddListener(UnequipSkill);
        foreach (GameObject subbranch in SubBranches)
         {
             subbranch.GetComponent<Button>().onClick.AddListener(() => EquipSkill(subbranch));
+        }
+    }
+
+    public void DisactivateBranch()
+    {
+        GetComponent<Button>().interactable = false;
+    }
+    public void ActivateBranch()
+    {
+        GetComponent<Button>().interactable = true;
+    }
+    public void SetSkillsActive(Skills skills)
+    {
+        foreach (GameObject subbranch in SubBranches)
+        {
+            var tmpskill = skills&subbranch.GetComponent<Skill>().skill;
+            if (tmpskill!=0)
+            {
+                subbranch.GetComponent<Skill>().ActivateSkill();
+            }
+        }
+    }
+    public void DisactivateAllButtons()
+    {
+        DisactivateBranch();
+        foreach (GameObject subbranch in SubBranches)
+        {
+            subbranch.GetComponent<Skill>().DisactivateSkill();
+        }
+    }
+    public void ActivateAllButtons()
+    {
+        ActivateBranch();
+        foreach (GameObject subbranch in SubBranches)
+        {
+            subbranch.GetComponent<Skill>().ActivateSkill();
         }
     }
     void EquipSkill(GameObject go)
@@ -28,7 +64,7 @@ public class Branch : MonoBehaviour
         SetSprite(go.GetComponent<Image>());
         currentSkill= tmpskill;
     }
-    public void LoadSkill(Skill.Skills skill)
+    public void LoadSkill(Skills skill)
     {   
         foreach(GameObject subbranch in SubBranches)
         { 

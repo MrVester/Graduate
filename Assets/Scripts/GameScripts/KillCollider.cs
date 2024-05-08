@@ -6,9 +6,10 @@ public class KillCollider : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") || col.CompareTag("Enemy"))
+        IDamagable damagable;
+        if (col.TryGetComponent<IDamagable>(out damagable))
         {
-            col.gameObject.GetComponent<HealthController>().Kill();
+            damagable.Kill();
         }
     }
 }

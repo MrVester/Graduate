@@ -1,16 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using TDController;
 using UnityEngine;
+using System;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
+    public Transform spotToGrow;
     public float speed = 2f;
     public float attackDamage=2f;
     private int facingVector = 1;
-    
+
     public float leftAngle;
     public float rightAngle;
     public float rotationDuration;
@@ -20,32 +19,85 @@ public class EnemyController : MonoBehaviour
 
     private bool isRotating = false;
 
-    private Animator anim;
-    private GameObject player;
+    protected Animator anim;
+    protected GameObject player;
+    protected Rigidbody2D rb;
     public float attackCoolDown=5f;
     public float timeBetweenAttacks=1f;
-    private bool canAttack_Anim=false;
-    private bool canAttack_Cor=true;
+    public bool isStuck { get; private set; }
+    protected bool isGameStopped = false;
+    private bool controlTaken = false;
 
-
-    private void Awake()
+    protected void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         player = FindObjectOfType<PlayerController>().gameObject;
+        rb=GetComponent<Rigidbody2D>();
+       
     }
     private void Start()
     {
+        /* GameEvents.current.onGameStop += DisableAnimator;
+         GameEvents.current.onGameStart += EnableAnimator;*/
+        GameEvents.current.onGameStop += GameStopped;
+        GameEvents.current.onGameStart += GameStarted;
+    }
+    private void OnDestroy()
+    {
 
+       /* GameEvents.current.onGameStop -= DisableAnimator;
+        GameEvents.current.onGameStart -= EnableAnimator;*/
+        GameEvents.current.onGameStop -= GameStopped;
+        GameEvents.current.onGameStart -= GameStarted;
     }
-    public void StartAttacking()
+
+    private void GameStarted()
     {
-        print("StartAttacking");
-        canAttack_Anim=true;
+        controlTaken = false;
+        isGameStopped = false;
+        print("GameStarted");
+        anim.enabled = true;
+        StopCoroutine(SetVelocityZero());
     }
-    public void EndAttacking()
+    private void GameStopped()
     {
-        print("EndAttacking");
-        canAttack_Anim = false;
+        controlTaken = true;
+
+        isGameStopped = true;
+        print("GameStopped");
+        anim.enabled = false;
+        StartCoroutine(SetVelocityZero());
+    }
+    private void EnableAnimator()
+    {
+       anim.enabled = true;
+    }
+    private void DisableAnimator()
+    {
+
+        anim.enabled = false;
+    }
+    public void Stuck(float time)
+    {
+        isStuck = true;
+        anim.SetBool("IsStuck", true);
+        StartCoroutine(StuckCor(time));
+    }
+    public void UnStuck()
+    {
+        anim.SetBool("IsStuck", false);
+        isStuck=false;
+    }
+
+    IEnumerator StuckCor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        UnStuck();
+        yield return null;
+    }
+    public void StartDeath()
+    {
+        anim.SetTrigger("Dead");
     }
     public void LookAtPlayer()
     {
@@ -97,32 +149,16 @@ public class EnemyController : MonoBehaviour
         transform.rotation = endrot;
         isRotating = false;
     }
-
-    public void StartAttackCoolDown()
+ 
+    private IEnumerator SetVelocityZero()
     {
-        
-        StartCoroutine(AttackCD());
+        while (controlTaken)
+        {
+            rb.velocity = Vector2.zero;
+            yield return null;
+        }
     }
-    private IEnumerator AttackCD()
-    {
-        anim.SetBool("OnAttackCoolDown", true);
 
-        yield return new WaitForSeconds(attackCoolDown);
-
-        anim.SetBool("OnAttackCoolDown", false);
-        yield return null;
-    }
-    public void ResetAttackCoolDown()
-    {
-        attackCoolDown = 0f;
-        anim.SetBool("OnAttackCoolDown", false);
-    }
-    void Update()
-    {
-        //Should move AttackCD to Start later
-
-        anim.SetFloat("Distance", Vector3.Distance(transform.position, player.transform.position));
-    }
     public Animator GetAnimator()
     {
         return anim;
@@ -130,34 +166,6 @@ public class EnemyController : MonoBehaviour
     public GameObject GetPlayer()
     {
         return player;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        HealthController healthContr;
-        if(collision.gameObject.TryGetComponent(out healthContr))
-        {
-            if(canAttack_Anim)
-            {
-                if (canAttack_Cor)
-                {
-                    healthContr.gameObject.GetComponent<HealthController>().TakeDamage(attackDamage);
-                    StartCoroutine(TimeBetweenAttacks());
-                }
-
-            }
-           
-        }
-        
-    }
-
-    private IEnumerator TimeBetweenAttacks()
-    {
-        canAttack_Cor = false;
-        yield return new WaitForSeconds(timeBetweenAttacks);
-        canAttack_Cor = true;
-        yield return null;
-        
     }
 
 }

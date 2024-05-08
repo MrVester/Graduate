@@ -8,12 +8,12 @@ public class Robot_Ball_Attack : EnemyBaseFSM
     private float speed;
     private float attackTimer;
     private int currentFacingVector;
-    EnemyController enemyController;
+    Robot_BallController enemyController;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        enemyController = enemy.GetComponentInParent<EnemyController>();
+        enemyController = enemy.GetComponentInParent<Robot_BallController>();
         speed = enemyController.speed;
         attackTimer=0f;
         enemyController.LookAtPlayer();
