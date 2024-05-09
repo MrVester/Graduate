@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class Robot_BallController : EnemyController
 {
+    
+    [SerializeField] private float radiusToAttack=20f;
+    [SerializeField] private float yDistanceToAttack=5f;
+    private float distance;
+    private float yDistance;
     private bool canAttack_Anim = false;
     private bool canAttack_Cor = true;
-
     private new void Awake()
     {   
         base.Awake();
@@ -45,10 +49,24 @@ public class Robot_BallController : EnemyController
     }
     void Update()
     {
-        //Should move AttackCD to Start later
-
-        anim.SetFloat("Distance", Vector3.Distance(transform.position, player.transform.position));
-        anim.SetFloat("YDistance", Mathf.Abs(transform.position.y-player.transform.position.y));
+        distance = Vector3.Distance(transform.position, player.transform.position);
+        if (distance <= radiusToAttack)
+        {
+            anim.SetBool("IsInRadius", true);
+        }
+        else
+        {
+            anim.SetBool("IsInRadius", false);
+        }
+        yDistance = Mathf.Abs(transform.position.y - player.transform.position.y);
+        if (yDistance<=yDistanceToAttack)
+        {
+            anim.SetBool("IsYDistance", true);
+        }
+        else
+        {
+            anim.SetBool("IsYDistance", false);
+        }
     }
    
 

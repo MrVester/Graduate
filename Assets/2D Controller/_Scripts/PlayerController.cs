@@ -28,6 +28,7 @@ namespace TDController
         private Vector2 _currentExternalVelocity;
         private int _fixedFrame;
         private bool _hasControl = true;
+        private Vector2 bufferVelocity;
 
         #endregion
 
@@ -65,36 +66,21 @@ namespace TDController
             else _currentExternalVelocity = vel;
         }
 
-        public virtual void TakeAwayControl(/*bool resetVelocity = true*/) {
-            /*if (resetVelocity) */_rb.velocity = Vector2.zero;
+        public virtual void TakeAwayControl() {
+            bufferVelocity=_rb.velocity;
+            _rb.velocity = Vector2.zero;
             _hasControl = false;
+            _rb.isKinematic = true;
         }
 
         public virtual void ReturnControl() {
-            _speed = Vector2.zero;
+
+            _speed = bufferVelocity;
             _hasControl = true;
+            _rb.isKinematic = false;
         }
-        private void TakeAwayAllControl()
-        {
-            TakeAwayControl();
-            controlTaken = true;
-            StartCoroutine(SetVelocityZero());
-        }
-        private void ReturnAllControl()
-        {
-            ReturnControl();
-            controlTaken = false;
-            StopCoroutine(SetVelocityZero());
-        }
-        private bool controlTaken=false;
-        private IEnumerator SetVelocityZero()
-        {
-            while (controlTaken)
-            {
-                _rb.velocity= Vector2.zero;
-                yield return null;
-            }
-        }
+
+
         #endregion
 
         protected virtual void Awake() {
@@ -103,29 +89,33 @@ namespace TDController
             animController = GetComponent<AnimationController>();
             _cachedTriggerSetting = Physics2D.queriesHitTriggers;
             Physics2D.queriesStartInColliders = false;
-            GameEvents.current.onGameStart += ReturnAllControl;
-            GameEvents.current.onGameStop += TakeAwayAllControl;
-            GameEvents.current.onDeath += Death;
+            
             ToggleColliders(isStanding: true);
             defaultTimeBetweenAttacks = timeBetweenAttacks;
         }
+        private void Start()
+        {
+            GameEvents.current.onGameStart += ReturnControl;
+            GameEvents.current.onGameStop += TakeAwayControl;
+            GameEvents.current.onDeath += Death;
+        }
         private void Death()
         {
-            TakeAwayAllControl();
-            GameEvents.current.onGameStart -= ReturnAllControl;
-            GameEvents.current.onGameStop -= TakeAwayAllControl;
+            TakeAwayControl();
+            GameEvents.current.onGameStart -= ReturnControl;
+            GameEvents.current.onGameStop -= TakeAwayControl;
         }
         private void OnDisable()
         {
-            GameEvents.current.onGameStart -= ReturnAllControl;
-            GameEvents.current.onGameStop -= TakeAwayAllControl;
-            GameEvents.current.onDeath -= TakeAwayAllControl;
+            GameEvents.current.onGameStart -= ReturnControl;
+            GameEvents.current.onGameStop -= TakeAwayControl;
+            GameEvents.current.onDeath -= TakeAwayControl;
         }
         private void OnDestroy()
         {
-            GameEvents.current.onGameStart -= ReturnAllControl;
-            GameEvents.current.onGameStop -= TakeAwayAllControl;
-            GameEvents.current.onDeath -= TakeAwayAllControl;
+            GameEvents.current.onGameStart -= ReturnControl;
+            GameEvents.current.onGameStop -= TakeAwayControl;
+            GameEvents.current.onDeath -= TakeAwayControl;
         }
         protected virtual void Update() {
             GatherInput();

@@ -21,18 +21,18 @@ public class EnemyController : MonoBehaviour
 
     protected Animator anim;
     protected GameObject player;
-    protected Rigidbody2D rb;
+    protected Rigidbody2D _rb;
     public float attackCoolDown=5f;
     public float timeBetweenAttacks=1f;
     public bool isStuck { get; private set; }
     protected bool isGameStopped = false;
-    private bool controlTaken = false;
+    private Vector2 bufferVelocity;
 
     protected void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         player = FindObjectOfType<PlayerController>().gameObject;
-        rb=GetComponent<Rigidbody2D>();
+        _rb=GetComponent<Rigidbody2D>();
        
     }
     private void Start()
@@ -53,20 +53,30 @@ public class EnemyController : MonoBehaviour
 
     private void GameStarted()
     {
-        controlTaken = false;
+        ReturnControl();
         isGameStopped = false;
         print("GameStarted");
         anim.enabled = true;
-        StopCoroutine(SetVelocityZero());
+        _rb.isKinematic = false;
+
     }
     private void GameStopped()
     {
-        controlTaken = true;
-
+        TakeAwayControl();
+        _rb.isKinematic = true;
         isGameStopped = true;
         print("GameStopped");
         anim.enabled = false;
-        StartCoroutine(SetVelocityZero());
+    }
+    protected virtual void TakeAwayControl()
+    {
+        bufferVelocity = _rb.velocity;
+        _rb.velocity = Vector2.zero;
+    }
+
+    protected virtual void ReturnControl()
+    {
+        _rb.velocity = bufferVelocity;
     }
     private void EnableAnimator()
     {
@@ -97,7 +107,13 @@ public class EnemyController : MonoBehaviour
     }
     public void StartDeath()
     {
+        TurnOffCollider();
         anim.SetTrigger("Dead");
+    }
+    private void TurnOffCollider()
+    {
+        _rb.isKinematic = true;
+        GetComponent<CircleCollider2D>().isTrigger = true;
     }
     public void LookAtPlayer()
     {
@@ -148,15 +164,6 @@ public class EnemyController : MonoBehaviour
         }
         transform.rotation = endrot;
         isRotating = false;
-    }
- 
-    private IEnumerator SetVelocityZero()
-    {
-        while (controlTaken)
-        {
-            rb.velocity = Vector2.zero;
-            yield return null;
-        }
     }
 
     public Animator GetAnimator()

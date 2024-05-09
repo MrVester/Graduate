@@ -15,7 +15,10 @@
 //SEMI DONE Make pretty design of SkillTree
 //DONE Save player's position on checkpoints
 //DONE Make regeneration (GreenHeart)
-//Think how to make Ydistance to robot dynamycally customizable from inspector (not in animator)
+//DONE Change UI settings window design
+//DONE Fix Robot_Ball material flashing on all robots
+//Work with z position of robots, player and checkpoints
+//DONE Think how to make Ydistance and AttackRadius to robot dynamycally customizable from inspector (not in animator)
 //Move checkpoint triggers to another script from AbilityController
 //Make umbrella and toxic rain
 //Work with colliders Ph. layers and change IsTrigger in RobotAttack

@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Metadata;
 
 public class EnemyHealthController : HealthController
 {
-
-    [SerializeField] private Material enemyMat;
+    [SerializeField] private List<Renderer> renderers;
     [SerializeField] private Color flashEnemyColor;
     [SerializeField] private GameObject deathParticles;
     private Color defaultColor;
@@ -14,18 +14,16 @@ public class EnemyHealthController : HealthController
     public float secondsFlash;
     public float secondsToDestroy = 1f;
     public event Action onDeath;
-    //protected DamageFlash _damageFlash;
+
     private void Awake()
     {
+        defaultColor = renderers[0].material.color;
         enemyController = GetComponent<EnemyController>();
-        enemyMat.color=Color.white;
-        defaultColor= enemyMat.color;
+       
     }
     protected new void Start()
     {
         base.Start();
-        //enemyAnimator = GetComponent<Animator>();
-        // _damageFlash = GetComponent<DamageFlash>();
     }
     public override void TakeDamage(float damage)
     {
@@ -62,26 +60,14 @@ public class EnemyHealthController : HealthController
     }
     IEnumerator FlashCoroutine()
     {
-       // print("FlashCoroutine");
         yield return ChangeColorCoroutine(defaultColor, flashEnemyColor, secondsFlash / 2);
         yield return ChangeColorCoroutine(flashEnemyColor, defaultColor, secondsFlash / 2);
-       /* while (elapsedTime < secondsFlash/2)
-        {   
-            enemyMat.color=Color.Lerp(defaultColor, flashEnemyColor, (elapsedTime / (secondsFlash / 2)));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        elapsedTime = 0;
-        while (elapsedTime  < secondsFlash/2 )
+
+        foreach (var renderer in renderers)
         {
-            print("SecondWhile");
-            enemyMat.color=Color.Lerp(flashEnemyColor, defaultColor, (elapsedTime / (secondsFlash / 2)));
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            renderer.material.color = defaultColor;
         }
-*/
-        // Make sure we got there
-        enemyMat.color = defaultColor;
+       
         
         yield return null;
 
@@ -91,8 +77,11 @@ public class EnemyHealthController : HealthController
         float elapsedTime = 0;
         while (elapsedTime < secondsFlash / 2)
         {
-           // print("SecondWhile");
-            enemyMat.color = Color.Lerp(fromColor, toColor, elapsedTime / duration);
+            foreach (var renderer in renderers)
+            {
+               renderer.material.color = Color.Lerp(fromColor, toColor, elapsedTime / duration);
+            }
+            
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -107,8 +96,6 @@ public class EnemyHealthController : HealthController
     // Update is called once per frame
     private void EnemyDied()
     {
-
-        //enemyAnimator.SetTrigger("Dead");
         StartCoroutine(DestroyEnemy(secondsToDestroy<secondsFlash?secondsFlash:secondsToDestroy));
 
     }
@@ -119,7 +106,6 @@ public class EnemyHealthController : HealthController
         Instantiate(deathParticles,transform.position,Quaternion.identity);
         onDeath?.Invoke();
         Destroy(gameObject);
-        //EnemiesCounter.current.DecrementEnemiesAmount();
         yield return null;
     }
 }

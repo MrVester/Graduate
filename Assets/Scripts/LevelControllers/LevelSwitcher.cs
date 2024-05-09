@@ -20,9 +20,9 @@ public class LevelSwitcher : MonoBehaviour
             GameEvents.current.LevelColliderChanged(GetComponent<PolygonCollider2D>());
         }
     }*/
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
 
             activeFrame?.SetActive(true);
@@ -37,14 +37,16 @@ public class LevelSwitcher : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-          try
-          {
-          activeFrame?.SetActive(false);
-          }
-          catch (Exception e)
-          {
-              print(e);
-          }
-
+        if (collision.CompareTag("Player"))
+        {
+            try
+            {
+                activeFrame?.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                print(e);
+            }
+        }
     }
 }

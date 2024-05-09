@@ -19,12 +19,13 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        GameEvents.current.onGameStop += PauseAnims;
-        GameEvents.current.onGameStart += ResumeAnims;
+       
         playerController= _input.gameObject.GetComponent<PlayerController>();
     }
     void Start()
     {
+        GameEvents.current.onGameStop += PauseAnims;
+        GameEvents.current.onGameStart += ResumeAnims;
         playerController.GroundedChanged += SetGrounded;
         playerController.Attacked += Attack;
     }

@@ -22,7 +22,6 @@ public class MainMenu : MonoBehaviour
         settingsButton.onClick.AddListener(() => SettingsButtonEvent());
         quitButton.onClick.AddListener(() => Application.Quit());
         backButtonFromSettings.onClick.AddListener(() => BackButtonFromSettingsEvent());
-
     }
 
 

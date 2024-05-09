@@ -40,4 +40,9 @@ public class EnemySpawner : MonoBehaviour
         if(!canSpawnEnemy)
             canSpawnEnemy=true;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position,1.5f);
+    }
 }

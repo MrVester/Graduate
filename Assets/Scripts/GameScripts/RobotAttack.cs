@@ -12,6 +12,7 @@ public class RobotAttack : MonoBehaviour
     [SerializeField] private float damage;
     private float defaultDamage;
     private LayerMask damagableLayers;
+    private Vector2 spherePos;
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -31,7 +32,7 @@ public class RobotAttack : MonoBehaviour
     public void Attack()
     {
         //print("Атаковал");
-        var spherePos = new Vector2(center.position.x + (attackRadius * animController.GetFacingVector()), center.position.y);
+        spherePos = new Vector2(center.position.x + (attackRadius * animController.GetFacingVector()), center.position.y);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(spherePos, sphereRadius, damagableLayers);
         foreach (var hitCollider in hitColliders)
         {
@@ -49,5 +50,10 @@ public class RobotAttack : MonoBehaviour
     private void OnDisable()
     {
         playerController.Attacked -= Attack;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(spherePos, sphereRadius);
     }
 }
