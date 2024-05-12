@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,15 @@ public class Branch : MonoBehaviour
 
     public void DisactivateBranch()
     {
-        GetComponent<Button>().interactable = false;
+        try
+        {
+         GetComponent<Button>().interactable = false;
+        }
+        catch (Exception e)
+        {
+            print(e);
+        }
+       
     }
     public void ActivateBranch()
     {

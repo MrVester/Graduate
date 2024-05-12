@@ -19,6 +19,7 @@
 //DONE Fix Robot_Ball material flashing on all robots
 //Work with z position of robots, player and checkpoints
 //DONE Think how to make Ydistance and AttackRadius to robot dynamycally customizable from inspector (not in animator)
+//Parallax?
 //Move checkpoint triggers to another script from AbilityController
 //Make umbrella and toxic rain
 //Work with colliders Ph. layers and change IsTrigger in RobotAttack
@@ -27,7 +28,7 @@
 //Dialogue system? (Find)
 //To work with URP effects
 //Localization??
-//Leveling, locations
+//DONE Leveling, locations
 //Music
 //Fix Robot_ball rigidbody
 

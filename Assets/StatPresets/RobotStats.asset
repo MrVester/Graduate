@@ -66,7 +66,7 @@ MonoBehaviour:
   StandUpOffset: {x: 0.19, y: 0.02}
   LedgeRaycastSpacing: 0.3
   LedgeClimbDuration: 0.5
-  AllowDash: 1
+  AllowDash: 0
   DashVelocity: 50
   DashDurationFrames: 5
   DashCooldown: 1.5

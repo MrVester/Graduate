@@ -108,6 +108,7 @@ public class EnemyController : MonoBehaviour
     public void StartDeath()
     {
         TurnOffCollider();
+        anim.SetBool("IsDead",true);
         anim.SetTrigger("Dead");
     }
     private void TurnOffCollider()
