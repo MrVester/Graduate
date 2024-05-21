@@ -1,0 +1,15 @@
+<map id="Robot_Ball_Idle" name="Robot_Ball_Idle">
+<area shape="rect" id="Node000001" title=" " alt="" coords="75,708,195,820"/>
+<area shape="rect" id="Node000002" href="$class_enemy_base_f_s_m.html" title=" " alt="" coords="79,547,191,659"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,674,137,708,132,708,132,674"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,371,155,440"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,454,122,546,117,547,91,455"/>
+<area shape="rect" id="Node000004" href="$class_player_health_controller.html" title=" " alt="" coords="179,328,331,483"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="210,484,179,534,175,531,206,481"/>
+<area shape="rect" id="Node000005" href="$class_health_controller.html" title=" " alt="" coords="110,124,218,279"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="207,291,223,327,218,329,202,293"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="113,5,215,75"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="167,90,167,124,161,124,161,90"/>
+<area shape="rect" id="Node000007" href="$interface_i_damagable.html" title=" " alt="" coords="242,156,350,247"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="287,262,273,329,268,328,281,261"/>
+</map>

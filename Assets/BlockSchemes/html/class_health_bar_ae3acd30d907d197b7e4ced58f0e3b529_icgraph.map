@@ -1,0 +1,9 @@
+<map id="HealthBar.SetHealthLerp" name="HealthBar.SetHealthLerp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="236,64,400,91"/>
+<area shape="rect" id="Node000002" href="$class_player_health_controller.html#a52fcf0a69f7371e650f525132893033a" title=" " alt="" coords="10,5,183,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,62,149,35,150,30,251,57"/>
+<area shape="rect" id="Node000003" href="$class_player_health_controller.html#afe7f4e46dfe54cf195781eebfd9c2a66" title=" " alt="" coords="9,56,184,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,80,184,80,184,75,220,75"/>
+<area shape="rect" id="Node000004" href="$class_player_health_controller.html#a384c11effbecd545a4f628e406d2126d" title=" " alt="" coords="5,123,188,165"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="257,98,171,125,169,119,255,93"/>
+</map>

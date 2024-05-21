@@ -1,0 +1,11 @@
+<map id="PlayerSkills" name="PlayerSkills">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,743,125,833"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="44,5,145,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,90,82,236,72,417,68,598,68,743,62,743,63,598,67,417,77,236,88,89"/>
+<area shape="rect" id="Node000003" href="$class_skill_tree.html" title=" " alt="" coords="81,417,236,679"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="101,89,109,196,123,321,137,417,132,418,117,322,104,196,95,90"/>
+<area shape="rect" id="Node000004" href="$class_branch.html" title=" " alt="" coords="132,124,287,321"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="126,86,150,123,145,126,122,89"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,679,91,728,86,726,105,677"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="197,322,184,401,179,400,191,321"/>
+</map>

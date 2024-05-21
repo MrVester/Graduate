@@ -1,0 +1,9 @@
+<map id="HealthController" name="HealthController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="111,123,219,277"/>
+<area shape="rect" id="Node000003" href="$class_enemy_health_controller.html" title=" " alt="" coords="5,336,151,469"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,292,109,337,104,335,123,290"/>
+<area shape="rect" id="Node000004" href="$class_player_health_controller.html" title=" " alt="" coords="175,325,327,480"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,290,221,325,216,327,201,292"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="114,5,215,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,90,167,123,162,123,162,90"/>
+</map>

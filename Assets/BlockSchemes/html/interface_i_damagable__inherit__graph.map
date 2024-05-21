@@ -1,0 +1,5 @@
+<map id="IDamagable" name="IDamagable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="27,5,135,96"/>
+<area shape="rect" id="Node000002" href="$class_player_health_controller.html" title=" " alt="" coords="5,144,157,299"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,111,84,145,79,145,79,111"/>
+</map>

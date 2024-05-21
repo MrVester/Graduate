@@ -1,0 +1,5 @@
+<map id="EnemyHealthController.TakeDamage" name="EnemyHealthController.TakeDamage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,192,48"/>
+<area shape="rect" id="Node000002" href="$class_enemy_controller.html#ad4ea42bc53e28dae9ea9e0829b09d37a" title=" " alt="" coords="240,13,423,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,24,224,24,224,29,192,29"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="TDController.PlayerController.TryGetLedgeCorner" name="TDController.PlayerController.TryGetLedgeCorner">
+<area shape="rect" id="Node000001" title=" " alt="" coords="486,5,678,48"/>
+<area shape="rect" id="Node000002" href="$class_t_d_controller_1_1_player_controller.html#aab5650989c6aee85cabc9add2a6df058" title=" " alt="" coords="246,5,438,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="471,29,438,29,438,24,471,24"/>
+<area shape="rect" id="Node000003" href="$class_t_d_controller_1_1_player_controller.html#a0a6fd565b3faaacfc42a99677496b0d7" title=" " alt="" coords="5,5,198,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,29,198,29,198,24,230,24"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="SkillTree.LoadSkills" name="SkillTree.LoadSkills">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,141,83"/>
+<area shape="rect" id="Node000002" href="$class_skill_tree.html#a5cfed3f56b120448e45363a2521c6ef9" title=" " alt="" coords="189,5,359,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,53,203,34,204,39,130,58"/>
+<area shape="rect" id="Node000003" href="$class_branch.html#a2fbeabb4d5c7c304128b31cbd1e08f31" title=" " alt="" coords="214,56,334,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,67,199,67,199,72,141,72"/>
+<area shape="rect" id="Node000004" href="$class_branch.html#a6ca208b1a2c35f8441416675c27682ff" title=" " alt="" coords="212,107,336,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="130,81,204,100,203,105,128,86"/>
+</map>

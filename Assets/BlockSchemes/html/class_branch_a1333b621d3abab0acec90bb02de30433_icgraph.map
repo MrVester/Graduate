@@ -1,0 +1,9 @@
+<map id="Branch.ActivateBranch" name="Branch.ActivateBranch">
+<area shape="rect" id="Node000001" title=" " alt="" coords="455,31,608,57"/>
+<area shape="rect" id="Node000002" href="$class_branch.html#ae9dda26068c7f56b61bdee98c31ecfb0" title=" " alt="" coords="235,5,407,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="439,36,407,32,408,26,440,30"/>
+<area shape="rect" id="Node000004" href="$class_skill_tree.html#a37432842d02f4b4df33b97f5d1f5a29e" title=" " alt="" coords="246,56,396,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="440,58,396,63,396,58,439,52"/>
+<area shape="rect" id="Node000003" href="$class_skill_tree.html#a4a86547e03710e4e1acfdf1d38f12825" title=" " alt="" coords="5,5,187,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,21,187,21,187,16,219,16"/>
+</map>

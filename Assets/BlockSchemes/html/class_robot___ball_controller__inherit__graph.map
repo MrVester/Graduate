@@ -1,0 +1,7 @@
+<map id="Robot_BallController" name="Robot_BallController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,688,167,821"/>
+<area shape="rect" id="Node000002" href="$class_enemy_controller.html" title=" " alt="" coords="14,123,158,640"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,655,89,689,83,689,83,655"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="35,5,137,75"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,90,89,123,83,123,83,90"/>
+</map>

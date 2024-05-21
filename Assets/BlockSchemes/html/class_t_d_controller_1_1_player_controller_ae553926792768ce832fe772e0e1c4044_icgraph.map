@@ -1,0 +1,11 @@
+<map id="TDController.PlayerController.ResetAirJumps" name="TDController.PlayerController.ResetAirJumps">
+<area shape="rect" id="Node000001" title=" " alt="" coords="726,39,919,81"/>
+<area shape="rect" id="Node000002" href="$class_t_d_controller_1_1_player_controller.html#a86ab43a87c86546b2edb072376be91af" title=" " alt="" coords="486,5,678,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="710,47,678,43,679,37,711,42"/>
+<area shape="rect" id="Node000005" href="$class_t_d_controller_1_1_player_controller.html#a1dea709896f1d5949be941058a37ae80" title=" " alt="" coords="486,72,678,115"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="711,78,679,83,678,77,710,73"/>
+<area shape="rect" id="Node000003" href="$class_t_d_controller_1_1_player_controller.html#a290e76ae849a034d12daef4b811c24bb" title=" " alt="" coords="246,5,438,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="471,29,438,29,438,24,471,24"/>
+<area shape="rect" id="Node000004" href="$class_t_d_controller_1_1_player_controller.html#a0a6fd565b3faaacfc42a99677496b0d7" title=" " alt="" coords="5,5,198,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="230,29,198,29,198,24,230,24"/>
+</map>

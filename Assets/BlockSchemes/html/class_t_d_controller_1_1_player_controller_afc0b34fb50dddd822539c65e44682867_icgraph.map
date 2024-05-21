@@ -1,0 +1,11 @@
+<map id="TDController.PlayerController.TakeAwayControl" name="TDController.PlayerController.TakeAwayControl">
+<area shape="rect" id="Node000001" title=" " alt="" coords="967,5,1159,48"/>
+<area shape="rect" id="Node000002" href="$class_t_d_controller_1_1_player_controller.html#a8a9066784e6304ba8d61599d8cb45ba6" title=" " alt="" coords="726,5,919,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="951,29,919,29,919,24,951,24"/>
+<area shape="rect" id="Node000003" href="$class_t_d_controller_1_1_player_controller.html#ac83479c68ad92a7cd575b6c41af00014" title=" " alt="" coords="486,5,678,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="711,29,679,29,679,24,711,24"/>
+<area shape="rect" id="Node000004" href="$class_t_d_controller_1_1_player_controller.html#aab5650989c6aee85cabc9add2a6df058" title=" " alt="" coords="246,5,438,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="471,29,438,29,438,24,471,24"/>
+<area shape="rect" id="Node000005" href="$class_t_d_controller_1_1_player_controller.html#a0a6fd565b3faaacfc42a99677496b0d7" title=" " alt="" coords="5,5,198,48"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="230,29,198,29,198,24,230,24"/>
+</map>

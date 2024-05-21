@@ -1,0 +1,5 @@
+<map id="Robot_Ball_Idle.OnStateUpdate" name="Robot_Ball_Idle.OnStateUpdate">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,210,32"/>
+<area shape="rect" id="Node000002" href="$class_enemy_controller.html#a80cdb0b92c40d33193fe423cc7ed9872" title=" " alt="" coords="258,5,457,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,16,242,16,242,21,210,21"/>
+</map>

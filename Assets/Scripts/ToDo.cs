@@ -17,11 +17,14 @@
 //DONE Make regeneration (GreenHeart)
 //DONE Change UI settings window design
 //DONE Fix Robot_Ball material flashing on all robots
-//Work with z position of robots, player and checkpoints
+//DONE Work with z position of robots, player and checkpoints
 //DONE Think how to make Ydistance and AttackRadius to robot dynamycally customizable from inspector (not in animator)
+//Make camera move up and down(W/S Buttons) to view obstacles
+//Make delay between Vine_attack(Anims+script parts)
+//DONE Add music settings into game scene
 //Parallax?
 //Move checkpoint triggers to another script from AbilityController
-//Make umbrella and toxic rain
+//Make umbrella and toxic rain location
 //Work with colliders Ph. layers and change IsTrigger in RobotAttack
 //OK Fix camera view for 3d objects in 2D plane?? 
 //Characters models (Find)

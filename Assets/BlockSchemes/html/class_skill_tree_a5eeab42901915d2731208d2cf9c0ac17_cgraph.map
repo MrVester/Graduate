@@ -1,0 +1,11 @@
+<map id="SkillTree.UnequipSkill" name="SkillTree.UnequipSkill">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,153,83"/>
+<area shape="rect" id="Node000002" href="$class_skill_tree.html#a0a698ff337cc2b21d18412ebebd56ae6" title=" " alt="" coords="201,56,336,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,67,185,67,185,72,153,72"/>
+<area shape="rect" id="Node000003" href="$class_skill_tree.html#a5cfed3f56b120448e45363a2521c6ef9" title=" " alt="" coords="384,5,554,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="324,53,398,34,399,39,325,58"/>
+<area shape="rect" id="Node000004" href="$class_branch.html#a2fbeabb4d5c7c304128b31cbd1e08f31" title=" " alt="" coords="410,56,529,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="336,67,394,67,394,72,336,72"/>
+<area shape="rect" id="Node000005" href="$class_branch.html#a6ca208b1a2c35f8441416675c27682ff" title=" " alt="" coords="407,107,531,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="325,81,399,100,398,105,324,86"/>
+</map>

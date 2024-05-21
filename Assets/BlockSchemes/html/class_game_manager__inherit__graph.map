@@ -1,0 +1,9 @@
+<map id="GameManager" name="GameManager">
+<area shape="rect" id="Node000001" title=" " alt="" coords="21,376,165,467"/>
+<area shape="rect" id="Node000002" href="$class_singleton.html" title=" " alt="" coords="5,257,181,327"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,342,96,376,91,376,91,342"/>
+<area shape="rect" id="Node000003" href="$class_singleton.html" title=" " alt="" coords="45,124,142,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,208,96,257,91,257,91,208"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="43,5,144,75"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="96,89,96,124,91,124,91,89"/>
+</map>

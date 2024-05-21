@@ -1,0 +1,26 @@
+var class_enemy_controller =
+[
+    [ "Awake", "class_enemy_controller.html#af64c9a5242284f2b4794e8e471e60f4c", null ],
+    [ "GetAnimator", "class_enemy_controller.html#a8eee87995bb465e8b5120a6d9e27ea44", null ],
+    [ "GetFacingVector", "class_enemy_controller.html#a8a13384cb75c40a7887f0931d25cc483", null ],
+    [ "GetPlayer", "class_enemy_controller.html#a35e63b709048f0bf5858ed43248172c4", null ],
+    [ "LookAtPlayer", "class_enemy_controller.html#a80cdb0b92c40d33193fe423cc7ed9872", null ],
+    [ "ReturnControl", "class_enemy_controller.html#a9e02821d9031e5bf5ec6f85476d95856", null ],
+    [ "StartDeath", "class_enemy_controller.html#ad4ea42bc53e28dae9ea9e0829b09d37a", null ],
+    [ "Stuck", "class_enemy_controller.html#a1163457dac52312624778d8be1c2ffee", null ],
+    [ "TakeAwayControl", "class_enemy_controller.html#a878b052a7ab3ca74c162bbaa41447f9d", null ],
+    [ "UnStuck", "class_enemy_controller.html#a3592096d6579d3752d4e46ef5204fb6b", null ],
+    [ "_rb", "class_enemy_controller.html#a0233fd9b48e3041ba2193c4971672e73", null ],
+    [ "anim", "class_enemy_controller.html#ac6ca3de26711fd546569096a49d098ed", null ],
+    [ "attackCoolDown", "class_enemy_controller.html#a523791984958e265b00f718bd581d25d", null ],
+    [ "attackDamage", "class_enemy_controller.html#aac2e78d7cd1271cef258e616032cd4c7", null ],
+    [ "isGameStopped", "class_enemy_controller.html#a48607613019c36ce3cc668160395cd26", null ],
+    [ "leftAngle", "class_enemy_controller.html#a5a4ffb0c01845b986adfb36f60d68d63", null ],
+    [ "player", "class_enemy_controller.html#a2616962b049afef4f58916b994f30b4f", null ],
+    [ "rightAngle", "class_enemy_controller.html#aff91461ed4f41631ba58b71b5857fdea", null ],
+    [ "rotationDuration", "class_enemy_controller.html#acede4eac5e02da9705c738bc48a29773", null ],
+    [ "speed", "class_enemy_controller.html#a2c5a111549b1d4d9f8141fd4c13bfcd5", null ],
+    [ "spotToGrow", "class_enemy_controller.html#a82dd3bb5efe2eb1e9d36ef23c6e7f396", null ],
+    [ "timeBetweenAttacks", "class_enemy_controller.html#ae3d1e17feabff6f78f93210024475691", null ],
+    [ "isStuck", "class_enemy_controller.html#a889386d1b5afbf84496826a88168197d", null ]
+];

@@ -66,15 +66,6 @@ namespace TDController
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ExampleAction"",
-                    ""type"": ""Button"",
-                    ""id"": ""fac85392-9cd4-4c47-a8da-8911e5b74689"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""a20c5066-c7ec-4298-990a-510f72e82a44"",
@@ -228,17 +219,6 @@ namespace TDController
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9d168e6e-7713-4ae3-b372-87fc73a539cc"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""19f4a3a7-3e3d-4e43-bccb-dbbfe723a1ae"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -254,7 +234,7 @@ namespace TDController
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -298,19 +278,8 @@ namespace TDController
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""13f43569-8981-4c2d-83eb-cbf0c247c466"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ExampleAction"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -320,7 +289,29 @@ namespace TDController
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44670763-e1b4-4744-aba2-0c1bcee5e852"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f983f551-0bc7-4dd9-8bbb-bcf5e6aa36de"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -419,7 +410,6 @@ namespace TDController
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-            m_Player_ExampleAction = m_Player.FindAction("ExampleAction", throwIfNotFound: true);
             m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
             m_Player_Growth = m_Player.FindAction("Growth", throwIfNotFound: true);
         }
@@ -487,7 +477,6 @@ namespace TDController
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Dash;
         private readonly InputAction m_Player_Attack;
-        private readonly InputAction m_Player_ExampleAction;
         private readonly InputAction m_Player_Menu;
         private readonly InputAction m_Player_Growth;
         public struct PlayerActions
@@ -498,7 +487,6 @@ namespace TDController
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
-            public InputAction @ExampleAction => m_Wrapper.m_Player_ExampleAction;
             public InputAction @Menu => m_Wrapper.m_Player_Menu;
             public InputAction @Growth => m_Wrapper.m_Player_Growth;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -522,9 +510,6 @@ namespace TDController
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @ExampleAction.started += instance.OnExampleAction;
-                @ExampleAction.performed += instance.OnExampleAction;
-                @ExampleAction.canceled += instance.OnExampleAction;
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
@@ -547,9 +532,6 @@ namespace TDController
                 @Attack.started -= instance.OnAttack;
                 @Attack.performed -= instance.OnAttack;
                 @Attack.canceled -= instance.OnAttack;
-                @ExampleAction.started -= instance.OnExampleAction;
-                @ExampleAction.performed -= instance.OnExampleAction;
-                @ExampleAction.canceled -= instance.OnExampleAction;
                 @Menu.started -= instance.OnMenu;
                 @Menu.performed -= instance.OnMenu;
                 @Menu.canceled -= instance.OnMenu;
@@ -624,7 +606,6 @@ namespace TDController
             void OnJump(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
-            void OnExampleAction(InputAction.CallbackContext context);
             void OnMenu(InputAction.CallbackContext context);
             void OnGrowth(InputAction.CallbackContext context);
         }
