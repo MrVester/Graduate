@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
         quitButton.onClick.AddListener(() => Application.Quit());
         backButtonFromSettings.onClick.AddListener(() => BackButtonFromSettingsEvent());
         SetContinueButtonState();
+        HideSettings();
     }
 
     private void StartNewGame()
@@ -62,14 +63,14 @@ public class MainMenu : MonoBehaviour
         settingsTab.SetActive(true);
         mainMenuTab.SetActive(false);
     }
-    private void BackButtonFromLevelSelectorEvent()
+    private void ShowSettings()
     {
-        mainMenuTab.SetActive(true);
+        settingsTab.SetActive(true);
     }
 
-    private void LevelSelectionButtonEvent()
+    private void HideSettings()
     {
-        mainMenuTab.SetActive(false);
+        settingsTab.SetActive(false);
     }
 
 

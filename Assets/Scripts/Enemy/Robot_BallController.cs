@@ -80,6 +80,7 @@ public class Robot_BallController : EnemyController
                 if (canAttack_Cor&&!isGameStopped)
                 {
                     healthContr.gameObject.GetComponent<HealthController>().TakeDamage(attackDamage);
+                    AudioController.current.PlayRobotBallHitSound();
                     StartCoroutine(TimeBetweenAttacks());
                 }
 

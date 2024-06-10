@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Branch : MonoBehaviour
 {
-   
+    [SerializeField]private Sprite Empty_Sprite;
     private Image BranchMain_Image;
     public List<GameObject> SubBranches;
     private SkillTree skillTree;
@@ -100,7 +100,7 @@ public class Branch : MonoBehaviour
     }
     void RemoveSprite()
     {
-        BranchMain_Image.sprite = GetComponentInParent<SkillTree>().Empty_Sprite;
+        BranchMain_Image.sprite = Empty_Sprite;
     }
     void SetSprite(Image image)
     {

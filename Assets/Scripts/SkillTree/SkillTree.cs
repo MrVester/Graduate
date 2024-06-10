@@ -7,27 +7,23 @@ using UnityEngine.UI;
 
 public class SkillTree : MonoBehaviour
 {
-   public Sprite Empty_Sprite;
-   public Image Heart_Image;
-   public Branch RedBranchMain;
-   public Branch BlueBranchMain;
-   public Branch GreenBranchMain;
+   [SerializeField] private Image Heart_Image;
+   [SerializeField] private Branch RedBranchMain;
+   [SerializeField] private Branch BlueBranchMain;
+   [SerializeField] private Branch GreenBranchMain;
    private Skills currentRedSkill;
    private Skills currentGreenSkill;
    private Skills currentBlueSkill;
 
    public event Action<(Skills, Skills, Skills)> SkillsUpdated;
-    //private Skill
     [SerializeField] Skills skills;
     [SerializeField] Skills abilities;
 
-    private void Awake()
-    {
-
-    }
     private void Start()
     {
         LoadSkills();
+        LoadAbilities();
+        DisactivateAllButtons();
     }
     public void DisactivateAllButtons()
     {
@@ -122,13 +118,13 @@ public class SkillTree : MonoBehaviour
     }
     public void EquipAbilities(Skills abilities)
     {
+        print("CRNT_AB: "+(int)this.abilities+" "+"NEW_AB: "+ (int)abilities);
         this.abilities|=abilities;
+        print("FINAL: " + (int)this.abilities);
         JSONSave.SetInt("Abilities", (int)this.abilities);
-        //LoadAbilities();
     }
     public void EquipSkill(Skills newskill, Skills oldskill)
-    {   //if(skills!=0)
-        //print("SkillSet changed from: "+skills.ToString());
+    {
         skills = (skills^oldskill)|newskill;
         JSONSave.SetInt("Skills", (int)skills);
         LoadSkills();
@@ -138,10 +134,5 @@ public class SkillTree : MonoBehaviour
         skills = skills ^ skill;
         JSONSave.SetInt("Skills",(int)skills);
         LoadSkills();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

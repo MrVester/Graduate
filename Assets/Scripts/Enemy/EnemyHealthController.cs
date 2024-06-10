@@ -26,22 +26,15 @@ public class EnemyHealthController : HealthController
     }
     public override void TakeDamage(float damage)
     {
-        //BloodParticles.Play();
-
-        // TODO: Add knockback
         health -= damage;
 
         if (!isDead)
         {
-            // AudioController.current.PlayHitSound();
-            //StartCoroutine(FlashCoroutine());
-            // _damageFlash.Flash(Color.white);
         }
         else
         {
             health = 0;
         }
-        // if hp is less than 0, call EnemyDied event
         if (health <= 0 && !isDead)
         {
             StartCoroutine(FlashCoroutine());
@@ -92,7 +85,6 @@ public class EnemyHealthController : HealthController
         base.Kill();
         EnemyDied();
     }
-    // Update is called once per frame
     private void EnemyDied()
     {
         StartCoroutine(DestroyEnemy(secondsToDestroy<secondsFlash?secondsFlash:secondsToDestroy));
@@ -102,6 +94,7 @@ public class EnemyHealthController : HealthController
     IEnumerator DestroyEnemy(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        AudioController.current.PlayRobotBallExplosionSound();
         Instantiate(deathParticles,transform.position,Quaternion.identity);
         onDeath?.Invoke();
         Destroy(gameObject);

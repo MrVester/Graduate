@@ -6,11 +6,9 @@ using UnityEngine;
 public abstract class HealthController : MonoBehaviour
 {
     public float maxHealth = 10.0f;
-    [SerializeField]
-    protected float health;
+    [SerializeField] protected float health;
     protected bool isDead = false;
  
-    // Start is called before the first frame update
     protected void Start()
     {
         health = maxHealth;

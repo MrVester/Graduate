@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ConfinerSetter : MonoBehaviour
@@ -18,11 +16,5 @@ public class ConfinerSetter : MonoBehaviour
     private void SetCollider(PolygonCollider2D coll)
     {
         confiner.m_BoundingShape2D = coll;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

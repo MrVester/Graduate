@@ -8,41 +8,40 @@ using UnityEngine;
 public class AbilitiesController : MonoBehaviour
 {
     [SerializeField] private SkillTree skillTree;
+    [SerializeField] private GameObject umbrellaLeaf;
     private PlayerController playerController;
     private PlayerHealthController healthController;
-/*    [SerializeField] private bool DoubleJump;
-    [SerializeField]private bool Vine;
-    [SerializeField]private bool GreenHeart;
-    [SerializeField]private bool Umbrella;
-    public event Action<bool> DoubleJumpChanged;
-    public event Action<bool> VineChanged;
-    public event Action<bool> GreenHeartChanged;
-    public event Action<bool> UmbrellaChanged;*/
+    private RobotAttack robotAttack;
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
         healthController = GetComponent<PlayerHealthController>();
+        robotAttack = GetComponent<RobotAttack>();
         skillTree.SkillsUpdated += SetAbilities;
     }
     public void Start()
     {
-        
         skillTree.DisactivateAllButtons();
-        
 
-    }
-    private void Update()
-    {
-       
     }
     private void SetAbilities((Skills red, Skills green, Skills blue) cort)
     {
-        //abilities = (Skills)JSONSave.GetInt("Abilities");
-        
+        if ((cort.red & Skills.RedSkill3) != 0)
+        {
+            robotAttack.SetBuffedDamage();
+
+        }
+        else
+        {
+            robotAttack.SetDefaultDamage();
+        }
         if ((cort.green & Skills.GreenSkill2) != 0)
         {
-            /*Umbrella = true;
-            UmbrellaChanged?.Invoke(true);*/
+            umbrellaLeaf.SetActive(true);
+        }
+        else
+        {
+            umbrellaLeaf.SetActive(false);
         }
         if ((cort.green & Skills.GreenSkill3) != 0)
         {
@@ -61,6 +60,7 @@ public class AbilitiesController : MonoBehaviour
         {
             playerController.SetDoubleJumps(false);
         }
+
     }
     public void EquipAbility(Skills ability)
     {
@@ -74,9 +74,7 @@ public class AbilitiesController : MonoBehaviour
             GameEvents.current.CheckpointSavePosition(collision.transform.position);
             skillTree.LoadAbilities();
             healthController.SetMaxHealth();
-            
         }
-       
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

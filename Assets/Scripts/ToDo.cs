@@ -22,18 +22,22 @@
 //Make camera move up and down(W/S Buttons) to view obstacles
 //Make delay between Vine_attack(Anims+script parts)
 //DONE Add music settings into game scene
-//Parallax?
 //Move checkpoint triggers to another script from AbilityController
-//Make umbrella and toxic rain location
 //Work with colliders Ph. layers and change IsTrigger in RobotAttack
 //OK Fix camera view for 3d objects in 2D plane?? 
 //Characters models (Find)
 //Dialogue system? (Find)
-//To work with URP effects
 //Localization??
 //DONE Leveling, locations
 //Music
 //Fix Robot_ball rigidbody
+//MAIN:
+//Parallax?
+//Add objects to background and foreground
+//Make umbrella and toxic rain location
+//To work with URP effects on rain location and collider switch urp
+//PlayerCOntroller, EnemyController, SkillTree Приложения точно
+//SkillTree и всё, что с ним связано, VineAttack, HealthControllers все и рассказать про интерфейсы, Healthbar
 
 
 

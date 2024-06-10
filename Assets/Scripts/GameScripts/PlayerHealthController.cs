@@ -8,11 +8,11 @@ public class PlayerHealthController : HealthController, IDamagable
 
     [SerializeField] private HealthBar healthBar;
     [SerializeField]private float greenHeartHealRatio;
-    [SerializeField]private float timeBetweenHeal;
+    [SerializeField]private float timeBetweenHeal=1;
     private bool canGreenHeartHeal=false;
     private PlayerController playerController;
     private AnimationController playerAnimator;
-    //private DamageFlash _damageFlash;
+    private bool greenHeartHealPaused;
 
     private void Awake()
     {
@@ -25,24 +25,16 @@ public class PlayerHealthController : HealthController, IDamagable
         base.Start();
        
         healthBar.SetMaxHealth(maxHealth);
-       // _damageFlash = GetComponent<DamageFlash>();
 
-        /// CharacterEvents.current.onTakeDamage += TakeDamage;
+        GameEvents.current.onGameStart += UnPauseGreenHeartHeal;
+        GameEvents.current.onGameStop += PauseGreenHeartHeal;
     }
 
     public override void TakeDamage(float damage)
     {
-        //BloodParticles.Play();
-
-        // TODO: Add knockback
         health -= damage;
-        // if hp is less than 0, call PlayerDied event
-
-
         if (!isDead)
         {
-           // AudioController.current.PlayHitSound();
-            //_damageFlash.Flash(Color.white);
 
         }
         else
@@ -63,7 +55,6 @@ public class PlayerHealthController : HealthController, IDamagable
         {
 
             healthBar.SetHealthLerp(health);
-            //Debug.Log("Player health: " + health);
         }
     }
 
@@ -76,18 +67,26 @@ public class PlayerHealthController : HealthController, IDamagable
     private void KillPlayer()
     {
         GameEvents.current.Death();
-        //GameEvents.current.GameStop();
         StopGreenHeartHeal();
-
         playerAnimator.animator.Play("Death");
         playerAnimator.SetDead(true);
         playerAnimator.animator.SetBool("IsDead", true);
     }
+
     public void SetMaxHealth()
     {
         print("SetMaxHealth");
         health=maxHealth;
         healthBar.SetHealthLerp(maxHealth);
+    }
+ 
+    private void PauseGreenHeartHeal()
+    {
+        greenHeartHealPaused=true;
+    }
+    private void UnPauseGreenHeartHeal()
+    {
+        greenHeartHealPaused = false;
     }
     public void StartGreenHeartHeal()
     {
@@ -99,23 +98,25 @@ public class PlayerHealthController : HealthController, IDamagable
         canGreenHeartHeal = false;
         StopCoroutine(GreenHeartHeal());
     }
-    IEnumerator GreenHeartHeal()
+    private IEnumerator GreenHeartHeal()
     {
+        yield return new WaitForSeconds(timeBetweenHeal);
         while (canGreenHeartHeal)
         {
-            yield return new WaitForSeconds(timeBetweenHeal);
-            if (health < maxHealth)
+            if (!greenHeartHealPaused)
             {
-                health += greenHeartHealRatio;
-                healthBar.SetHealthLerp(health);
+                if (health < maxHealth)
+                {
+                    health += greenHeartHealRatio;
+                    healthBar.SetHealthLerp(health);
+                }
+                else
+                {
+                    health = maxHealth;
+                    healthBar.SetHealthLerp(health);
+                }
+                yield return new WaitForSeconds(timeBetweenHeal);
             }
-
-            else
-            {
-                health = maxHealth;
-                healthBar.SetHealthLerp(health);
-            }
-               
             yield return null;
         }
     }

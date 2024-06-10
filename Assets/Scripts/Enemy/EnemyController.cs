@@ -37,16 +37,11 @@ public class EnemyController : MonoBehaviour
     }
     private void Start()
     {
-        /* GameEvents.current.onGameStop += DisableAnimator;
-         GameEvents.current.onGameStart += EnableAnimator;*/
         GameEvents.current.onGameStop += GameStopped;
         GameEvents.current.onGameStart += GameStarted;
     }
     private void OnDestroy()
     {
-
-       /* GameEvents.current.onGameStop -= DisableAnimator;
-        GameEvents.current.onGameStart -= EnableAnimator;*/
         GameEvents.current.onGameStop -= GameStopped;
         GameEvents.current.onGameStart -= GameStarted;
     }
@@ -77,15 +72,6 @@ public class EnemyController : MonoBehaviour
     protected virtual void ReturnControl()
     {
         _rb.velocity = bufferVelocity;
-    }
-    private void EnableAnimator()
-    {
-       anim.enabled = true;
-    }
-    private void DisableAnimator()
-    {
-
-        anim.enabled = false;
     }
     public void Stuck(float time)
     {

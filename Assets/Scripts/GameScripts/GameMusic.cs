@@ -8,7 +8,6 @@ public class GameMusic : MonoBehaviour
 
     void Start()
     {
-        JSONSave.Start(JSONSaveConfig.GetConfig());
         audioSrc = GetComponent<AudioSource>();
         audioSrc.volume = JSONSave.GetFloat("SaveVolume");
     }

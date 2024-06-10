@@ -4700,8 +4700,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   center: {fileID: 5746937160241509564}
   attackRadius: 2
-  sphereRadius: 1
-  damage: 2
+  sphereRadius: 2
+  defaultDamage: 2
+  buffedDamage: 3.5
 --- !u!114 &1502986048506211354
 MonoBehaviour:
   m_ObjectHideFlags: 0

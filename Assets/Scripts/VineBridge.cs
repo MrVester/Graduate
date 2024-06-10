@@ -15,7 +15,6 @@ public class VineBridge : MonoBehaviour
     private bool checkpointReached;
     private bool canResetBridge = false;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         input= GetComponent<PlayerInput>();
@@ -55,7 +54,7 @@ public class VineBridge : MonoBehaviour
         if (!canResetBridge)
             canResetBridge = true;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (isInsideColl&&
@@ -63,6 +62,7 @@ public class VineBridge : MonoBehaviour
             playerSkills.GetSkill(SkillColor.Green)==Skills.GreenSkill1&&
             !activated)
         {
+            AudioController.current.PlayGrowSound();
             activated = true;
             animator.SetTrigger("StartBridge");
         }

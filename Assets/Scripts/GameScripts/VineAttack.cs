@@ -64,7 +64,7 @@ public class VineAttack : MonoBehaviour
             if (enemyToStuck)
             if (Vector3.Distance(transform.position, enemyToStuck.transform.position)<=attackDistance)
                 {
-                    
+                    AudioController.current.PlayGrowSound();
                     enemyToStuck.Stuck(stunTime);
                     StartCoroutine(SpawnVine(enemyToStuck.spotToGrow));
                 }

@@ -9,8 +9,9 @@ public class RobotAttack : MonoBehaviour
     [SerializeField] private Transform center;
     [SerializeField] float attackRadius;
     [SerializeField] float sphereRadius;
-    [SerializeField] private float damage;
-    private float defaultDamage;
+    [SerializeField] private float defaultDamage;
+    [SerializeField] private float buffedDamage;
+    private float damage;
     private LayerMask damagableLayers;
     private Vector2 spherePos;
     private void Awake()
@@ -24,7 +25,14 @@ public class RobotAttack : MonoBehaviour
         playerController.Attacked += Attack;
         GameEvents.current.onDeath += DisableAttack;
     }
-
+    public void SetBuffedDamage()
+    {
+        damage = buffedDamage;
+    }
+    public void SetDefaultDamage()
+    {
+        damage = defaultDamage;
+    }
     private void DisableAttack()
     {
         playerController.Attacked -= Attack;
@@ -32,6 +40,7 @@ public class RobotAttack : MonoBehaviour
     public void Attack()
     {
         //print("Атаковал");
+        AudioController.current.PlayWhipAttackSound();
         spherePos = new Vector2(center.position.x + (attackRadius * animController.GetFacingVector()), center.position.y);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(spherePos, sphereRadius, damagableLayers);
         foreach (var hitCollider in hitColliders)
@@ -39,7 +48,11 @@ public class RobotAttack : MonoBehaviour
             //print("Атаковал2: "+hitCollider.name);
             EnemyController tmp;
             if(hitCollider.TryGetComponent(out tmp)&& hitCollider.isTrigger)
-            hitCollider.gameObject.GetComponent<HealthController>().TakeDamage(damage);
+            {
+                AudioController.current.PlayHitSound();
+                hitCollider.gameObject.GetComponent<HealthController>().TakeDamage(damage);
+            }
+           
         }
     }
     private void OnDestroy()

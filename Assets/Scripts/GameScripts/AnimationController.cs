@@ -1,5 +1,6 @@
 using System.Collections;
 using TDController;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
@@ -16,18 +17,48 @@ public class AnimationController : MonoBehaviour
     private bool isRotating = false;
     private bool isDead = false;
     private bool isPaused= false;
-    // Start is called before the first frame update
+    private bool isOnGround= true;
+    private bool isPlayerStepsPlaying = false;
+
     private void Awake()
     {
        
         playerController= _input.gameObject.GetComponent<PlayerController>();
     }
+    
     void Start()
     {
         GameEvents.current.onGameStop += PauseAnims;
         GameEvents.current.onGameStart += ResumeAnims;
         playerController.GroundedChanged += SetGrounded;
         playerController.Attacked += Attack;
+    }
+    void Update()
+    {
+        if (isDead || isPaused) return;
+        if (_input.FrameInput.Growth)
+        {
+            animator.SetTrigger("Growth");
+        }
+        animator.SetFloat("Jump", playerController.Speed.y);
+        animator.SetFloat("Speed", Mathf.Abs(playerController.Speed.x));
+        HandleAudio();
+        RotateChar();
+    }
+    private void HandleAudio()
+    {
+        if (isOnGround &&
+            Mathf.Abs(playerController.Speed.x) > 0 &&
+            !isPlayerStepsPlaying)
+        {
+            isPlayerStepsPlaying = true;
+            AudioController.current.PlayPlayerStepsSound();
+        }else
+        if(playerController.Speed.x == 0 || !isOnGround)
+        {
+            isPlayerStepsPlaying = false;
+            AudioController.current.StopPlayerStepsSound();
+        }
     }
     public void SetDead(bool isDead)
     {
@@ -39,6 +70,7 @@ public class AnimationController : MonoBehaviour
     }
     private void PauseAnims()
     {
+        AudioController.current.StopPlayerStepsSound();
         animator.enabled=false;
         isPaused = true;
     }
@@ -49,27 +81,14 @@ public class AnimationController : MonoBehaviour
     }
     private void SetGrounded(bool isGrounded,float ySpeed)
     {
+        isOnGround = isGrounded;
         if (isGrounded)
         {
             animator.SetTrigger("Grounded");
         }
         animator.SetBool("IsGrounded",isGrounded);
     }
-    void Update()   
-    {
-        if (isDead||isPaused) return;
-        if (_input.FrameInput.Growth)
-        {
-            animator.SetTrigger("Growth");
-        }
-    /*    if (_input.FrameInput.AttackDown)
-        {
-            
-        }*/
-        animator.SetFloat("Jump", playerController.Speed.y);
-        animator.SetFloat("Speed", Mathf.Abs(playerController.Speed.x));
-        RotateChar();
-    }
+    
     public void Attack()
     {
         animator.SetTrigger("Attack");

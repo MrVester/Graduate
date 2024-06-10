@@ -14,7 +14,7 @@ public enum Skills : int
     BlueSkill1 = 1 << 6,
     BlueSkill2 = 1 << 7,
     BlueSkill3 = 1 << 8,
-    All=111111111,
+    //All=111111111,
 }
 public class Skill : MonoBehaviour
 {
