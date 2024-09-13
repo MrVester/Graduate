@@ -14,6 +14,6 @@ Controls:
 ***ESC*** - Opens menu
 
 
-![image](https://github.com/user-attachments/assets/e0a71b48-0669-4817-a436-5298884ac03b)
+![image](https://github.com/user-attachments/assets/b4b8f30a-4259-4443-a6c7-9c84fb7208f8)
 ![image](https://github.com/user-attachments/assets/b4ea4085-34c3-4beb-a7a0-337dae741cfe)
 ![image](https://github.com/user-attachments/assets/178d6ff0-48ed-4ec1-97b1-97aa1f809b81)
